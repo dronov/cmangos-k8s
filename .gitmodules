@@ -1,0 +1,3 @@
+[submodule "proxmox-tf/ProxmoxCloudInitScript"]
+	path = proxmox-tf/ProxmoxCloudInitScript
+	url = git@github.com:dronov/ProxmoxCloudInitScript.git
