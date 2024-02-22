@@ -1,0 +1,13 @@
+---
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: mangosd-nfs-data
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 192.168.124.11
+  share: /wow/extracted-data
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+mountOptions:
+  - nfsvers=4.1

@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mangosd
+  name: mangosd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: mangosd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/exp-default: "true"
+        io.kompose.service: mangosd
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              value: "192.168.124.1"
+            - name: DB_PASS
+              value: mangos
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_ROOT_PASS
+              value: mangos
+            - name: DB_USER
+              value: mangos
+            - name: INSTALL_FULL_DB
+              value: "TRUE"
+          image: ghcr.io/jrtashjian/cmangos-mangosd-classic:latest
+          imagePullPolicy: Always
+          name: mangosd
+          ports:
+            - containerPort: 8085
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/cmangos/etc
+              name: cmangos-etc-nfs
+              readOnly: true
+            - mountPath: /opt/cmangos-data
+              name: cmangos-data-nfs
+              readOnly: true
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      restartPolicy: Always
+      volumes:
+        - name: cmangos-data-nfs
+          persistentVolumeClaim:
+            claimName: mangosd-pvc-data
+        - name: cmangos-etc-nfs
+          persistentVolumeClaim:
+            claimName: mangosd-pvc-etc
+status: {}

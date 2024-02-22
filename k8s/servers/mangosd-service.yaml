@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: mangosd
+  name: mangosd
+spec:
+  ports:
+    - name: "8085"
+      port: 8085
+      targetPort: 8085
+      nodePort:
+  selector:
+    io.kompose.service: mangosd
+status:
+  loadBalancer: {}

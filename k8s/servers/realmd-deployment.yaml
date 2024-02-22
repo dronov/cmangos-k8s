@@ -1,0 +1,57 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.28.0 (HEAD)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: realmd
+  name: realmd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: realmd
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.28.0 (HEAD)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/exp-default: "true"
+        io.kompose.service: realmd
+    spec:
+      containers:
+        - env:
+            - name: DB_HOST
+              value: "192.168.124.1"
+            - name: DB_PASS
+              value: mangos
+            - name: DB_PORT
+              value: "3306"
+            - name: DB_ROOT_PASS
+              value: mangos
+            - name: DB_USER
+              value: mangos
+          image: ghcr.io/jrtashjian/cmangos-realmd-classic:latest
+          name: realmd
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3724
+          resources: {}
+          volumeMounts:
+            - mountPath: /opt/cmangos/etc
+              name: realmd-etc-nfs
+              readOnly: true
+      imagePullSecrets:
+        - name: dockerconfigjson-github-com
+      restartPolicy: Always
+      volumes:
+        - name: realmd-etc-nfs
+          persistentVolumeClaim:
+            claimName: realmd-pvc
+status: {}
