@@ -1,3 +1,6 @@
 [submodule "ProxmoxCloudInitScript"]
 	path = proxmox/ProxmoxCloudInitScript
 	url = git@github.com:dronov/ProxmoxCloudInitScript.git
+[submodule "cmangos-docker"]
+	path = cmangos-docker
+	url = git@github.com:jrtashjian/cmangos-docker.git
