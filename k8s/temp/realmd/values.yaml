@@ -47,9 +47,14 @@ securityContext: {}
   # runAsUser: 1000
 
 service:
-  port: 3724, 8085
+  port: 3724
   type: LoadBalancer
-  LoadBalancerIP: 192.168.0.210
+  loadBalancerIP: 192.168.0.210
+
+serviceMangosd:
+  port: 8085
+  type: LoadBalancer
+  loadBalancerIP: 192.168.0.211
 
 ingress:
   enabled: false

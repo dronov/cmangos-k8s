@@ -38,7 +38,7 @@ spec:
   {{- end }}
   rules:
     {{- range .Values.ingress.hosts }}
-    - host: {{ .host | quote }}
+    - host: "192.168.0.212"
       http:
         paths:
           {{- range .paths }}
@@ -54,8 +54,22 @@ spec:
                   number: 3724
               {{- else }}
               serviceName: {{ $fullName }}
-              servicePort: {{ $svcPort }}
+              servicePort: 3724
               {{- end }}
           {{- end }}
+          - path: /mangosd
+            {{- if and .pathType (semverCompare ">=1.18-0" $.Capabilities.KubeVersion.GitVersion) }}
+            pathType: Prefix
+            {{- end }}
+            backend:
+              {{- if semverCompare ">=1.19-0" $.Capabilities.KubeVersion.GitVersion }}
+              service:
+                name: mangosd
+                port:
+                  number: 8085
+              {{- else }}
+              serviceName: mangosd
+              servicePort: 8085
+              {{- end }}
     {{- end }}
 {{- end }}

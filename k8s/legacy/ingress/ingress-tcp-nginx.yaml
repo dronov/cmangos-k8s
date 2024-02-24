@@ -2,7 +2,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: ingress-nginx-tcp
-  namespace: ingress-nginx
+  namespace: default
 data:
   8085: "default/mangosd:8085"
   3724: "default/realmd:3724"

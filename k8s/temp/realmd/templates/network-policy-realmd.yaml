@@ -1,0 +1,16 @@
+kind: NetworkPolicy
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: realmd-allow-all
+  namespace: default
+spec:
+  podSelector:
+    matchLabels:
+      io.kompose.service: realmd
+  policyTypes:
+  - Ingress
+  - Egress
+  ingress:
+  - {}
+  egress:
+  - {}
