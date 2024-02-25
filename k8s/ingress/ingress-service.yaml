@@ -4,8 +4,6 @@ metadata:
   name: ingress-nginx
   namespace: default
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
     app: ingress-nginx
 spec:
   type: LoadBalancer
@@ -20,5 +18,4 @@ spec:
       targetPort: 3724
       protocol: TCP
   selector:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
+    app: ingress-nginx

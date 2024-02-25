@@ -4,8 +4,6 @@ metadata:
   name: nginx-ingress
   namespace: default
   labels:
-    app.kubernetes.io/name: ingress-nginx
-    app.kubernetes.io/part-of: ingress-nginx
     app: ingress-nginx
 spec:
   replicas: 1
