@@ -1,12 +1,12 @@
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
-  name: ingress-allow-all
+  name: mangosd-allow-all
   namespace: default
 spec:
   podSelector:
     matchLabels:
-      app.kubernetes.io/instance: ingress-nginx
+      app.kubernetes.io/instance: mangosd
   policyTypes:
     - Ingress
     - Egress

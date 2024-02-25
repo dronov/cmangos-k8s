@@ -6,6 +6,7 @@ metadata:
   labels:
     app.kubernetes.io/name: ingress-nginx
     app.kubernetes.io/part-of: ingress-nginx
+    app: ingress-nginx
 spec:
   replicas: 1
   selector:
@@ -22,14 +23,10 @@ spec:
         imagePullPolicy: Always
         name: nginx-plus-ingress
         ports:
-        - name: http
-          containerPort: 80
-        - name: https
-          containerPort: 443
         - name: realmd
           containerPort: 3724
         - name: mangosd
           containerPort: 8085
         args:
           - /nginx-ingress-controller
-          - --tcp-services-configmap=ingress-nginx/tcp-services
+          - --tcp-services-configmap=default/ingress-nginx-tcp

@@ -6,11 +6,11 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      io.kompose.service: realmd
+      app.kubernetes.io/instance: realmd 
   policyTypes:
-  - Ingress
-  - Egress
+    - Ingress
+    - Egress
   ingress:
-  - {}
+    - {}
   egress:
-  - {}
+    - {}
