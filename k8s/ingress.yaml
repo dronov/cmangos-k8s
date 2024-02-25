@@ -1,0 +1,35 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcp-proxy-service-realmd
+  namespace: default
+  annotations:
+    metallb.universe.tf/allow-shared-ip: 192.168.0.220
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: realmd
+  ports:
+  - name: proxied-tcp-3724
+    protocol: TCP
+    port: 3724
+    targetPort: 3724
+  type: LoadBalancer
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: tcp-proxy-service-mangosd
+  namespace: default
+  annotations:
+    metallb.universe.tf/allow-shared-ip: 192.168.0.220
+spec:
+  type: LoadBalancer
+  selector:
+    app.kubernetes.io/name: mangosd
+  ports:
+  - name: proxied-tcp-8085
+    protocol: TCP
+    port: 8085
+    targetPort: 8085
+  type: LoadBalancer
