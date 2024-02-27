@@ -4,7 +4,7 @@ metadata:
   name: tcp-proxy-service-realmd
   namespace: default
   annotations:
-    metallb.universe.tf/allow-shared-ip: 192.168.0.220
+    metallb.universe.tf/allow-shared-ip: 192.168.0.204
 spec:
   type: LoadBalancer
   selector:
@@ -22,7 +22,7 @@ metadata:
   name: tcp-proxy-service-mangosd
   namespace: default
   annotations:
-    metallb.universe.tf/allow-shared-ip: 192.168.0.220
+    metallb.universe.tf/allow-shared-ip: 192.168.0.204
 spec:
   type: LoadBalancer
   selector:
