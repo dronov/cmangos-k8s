@@ -1,12 +1,14 @@
 FROM ghcr.io/jrtashjian/cmangos-realmd-classic:latest
 ENTRYPOINT ["/tini", "--"]
-ENV DB_HOST=192.168.50.82
+ENV DB_HOST=192.168.0.106
 ENV DB_PORT=3306
-ENV DB_USER=mangos
-ENV DB_PASS=mangos
-ENV DB_ROOT_PASS=mangos
+ENV DB_USER=root
+ENV DB_PASS=root
+ENV DB_ROOT_PASS=root
 ENV DB_NAME=mangos
 ENV DB_ADMIN_USER=root
-ENV DB_ADMIN_PASS=mangos
+ENV DB_ADMIN_PASS=root
 CMD ["/00_init.sh"]
+RUN sed -i 's/127.0.0.1/192.168.0.202/g' /opt/cmangos/etc/realmd.conf.dist
+RUN sed -i 's/127.0.0.1/192.168.0.202/g' /opt/cmangos/configs/realmd.conf.dist
 EXPOSE 3724

@@ -16,5 +16,5 @@ variable "net_prefix" {
 }
 variable "instance_count" {
   type    = number
-  default = 5
+  default = 9
 }

@@ -1,14 +1,15 @@
 FROM ghcr.io/jrtashjian/cmangos-mangosd-classic:latest
 COPY extracted-data /opt/cmangos-data
-ENV DB_HOST=192.168.0.53
+ENV DB_HOST=192.168.0.106
 ENV DB_PORT=3306
-ENV DB_USER=mangos
-ENV DB_PASS=mangos
-ENV DB_ROOT_PASS=mangos
-ENV DB_NAME=mangos
+ENV DB_USER=root
+ENV DB_PASS=root
+ENV DB_ROOT_PASS=root
 ENV DB_ADMIN_USER=root
-ENV DB_ADMIN_PASS=mangos
-ENV INSTALL_FULL_DB=TRUE
+ENV DB_ADMIN_PASS=root
+ENV INSTALL_FULL_DB=FALSE
 ENTRYPOINT ["/tini", "--"]
 CMD ["/00_init.sh"]
+RUN sed -i 's/127.0.0.1/192.168.0.202/g' /opt/cmangos/etc/mangosd.conf.dist
+RUN sed -i 's/127.0.0.1/192.168.0.202/g' /opt/cmangos/configs/mangosd.conf.dist
 EXPOSE 8085
